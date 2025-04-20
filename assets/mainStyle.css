@@ -1,0 +1,32 @@
+/* :P */
+
+* {transition: rotate 5s linear;}
+
+/* Elements */
+
+body {
+  margin: auto;
+  margin-top: 1em;
+  width: 70%;
+  background-color: rgb(240, 240, 240);
+}
+
+h1 {text-align: center;}
+
+p {text-indent: 2rem; font-size: 1.125rem}
+
+img {
+  image-rendering: auto;
+  image-rendering: pixelated;
+}
+
+/* Load Animation */
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
