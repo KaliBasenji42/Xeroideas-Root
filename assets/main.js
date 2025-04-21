@@ -52,12 +52,6 @@ function expndOrClps(ID, bttnID) {
   
 }
 
-// Set Elements
-
-for(let i = 0; i < head.length; i++) head[i].innerHTML += headHTML;
-
-for(let i = 0; i < body.length; i++) body[i].innerHTML += bodyHTML;
-
 // Events
 
 document.addEventListener('DOMContentLoaded', function () {

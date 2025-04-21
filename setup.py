@@ -15,7 +15,7 @@ exts = [
   '.html'
 ]
 
-location = 'projects/'
+location = './'
 
 # Template
 

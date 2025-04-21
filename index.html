@@ -1,30 +1,47 @@
+<!--Start-->
+
 <!DOCTYPE html>
-<html lang = "en-US">
+<html lang="en-US">
 
 <head>
-  <title>Home</title>
-  <meta name = "viewport" content = "width=device-width">
-  <link href = "assets/mainStyle.css" rel = "stylesheet" type = "text/css" />
-  <link href = "assetsHome/mainStyle.css" rel = "stylesheet" type = "text/css" />
-  <link href = "assets/icon.png" rel = "icon">
+<!--End-->
+  <title>Xeroideas</title>
+<!--Start-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="../../assets/mainStyle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/mainStyle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/icon.png" rel="icon" id="icon">
+  <script>
+    // Icon Error Detection and Relink
+    window.onload = function() {
+      let icon = document.getElementById('icon');
+      let img = document.createElement('img');
+      img.src = icon.href;
+      img.onerror = function() {
+        icon.href = '../../assets/icon.png';
+      };
+    }
+  </script>
 </head>
+
+<!--End-->
 
 <body>
   
-  <div id="link" style="text-align: center; font-size: 1.5em; background: rgb(255, 128, 128); position: fixed; width: 25%; right: 1em; bottom: 1em; font-weight: bold;">
-    Java Script does not seem to be linked. Most features and some content may be missing.
-  </div>
+<!--Start-->
   
-  <script src="assets/areFilesLinked.js"></script>
+<!--End-->
   
-  <script src="assetsHome/main.js"></script>
-  <script src="assets/main.js"></script>
-  
-  <h1>Home</h1>
+  <h1>Xeroideas</h1>
   
 </body>
 
+<!--Start-->
+
 </html>
+
+<!--End-->
 
 <!--
  _   _   _____   _       _       _____   _

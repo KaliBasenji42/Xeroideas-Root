@@ -1,0 +1,59 @@
+<!--Start-->
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<!--End-->
+  <title>template</title>
+<!--Start-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="../../assets/mainStyle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/mainStyle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/icon.png" rel="icon" id="icon">
+  <script>
+    // Icon Error Detection and Relink
+    window.onload = function() {
+      let icon = document.getElementById('icon');
+      let img = document.createElement('img');
+      img.src = icon.href;
+      img.onerror = function() {
+        icon.href = '../../assets/icon.png';
+      };
+    }
+  </script>
+</head>
+
+<!--End-->
+
+<body>
+  
+<!--Start-->
+  
+  <div id="link" style="text-align: center; font-size: 1.5em; background: rgb(255, 128, 128); position: fixed; width: 25%; right: 1em; bottom: 1em; font-weight: bold;">
+    Java Script does not seem to be linked. Most features and some content may be missing.
+  </div>
+  
+  <div id="navbar">
+    <a href="./">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="server.html">Servers' Status</a>
+  </div>
+  
+  <script src="../../assets/areFilesLinked.js"></script>
+  
+  <script src="assets/main.js"></script>
+  <script src="../../assets/main.js"></script>
+  
+<!--End-->
+  
+  content
+  
+</body>
+
+<!--Start-->
+
+</html>
+
+<!--End-->
