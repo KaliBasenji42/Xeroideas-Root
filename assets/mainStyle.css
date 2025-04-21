@@ -52,6 +52,7 @@ img {
 
 #theme {
   background-color: rgba(0, 0, 0, 0);
+  color: inherit;
   height: 2.5rem;
   width: 2.5rem;
   
@@ -59,7 +60,6 @@ img {
   border-radius: 0.5rem;
   
   font-size: 1.5rem;
-  
 }
 
 #theme:hover {
