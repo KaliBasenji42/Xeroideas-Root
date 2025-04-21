@@ -26,7 +26,7 @@ tempStart = '<!--Start-->\n'
 tempEnd = '<!--End-->\n'
 
 projectId = '{project}'
-projectDepth = len('projects/') # What to cut off in front of Project
+projectDepth = len('') # What to cut off in front of Project
 
 # Simple Functions
 

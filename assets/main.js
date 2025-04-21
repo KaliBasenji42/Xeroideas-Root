@@ -6,6 +6,10 @@ const body = document.getElementsByTagName("body");
 
 let timeout;
 
+let themeMode = localStorage.getItem('theme');
+if(themeMode == null) themeMode = 'dark';
+let themeBttn = document.getElementById('theme');
+
 // Functions
 
 function redirect(href) {
@@ -52,12 +56,51 @@ function expndOrClps(ID, bttnID) {
   
 }
 
+function setTheme() {
+  
+  console.log('Theme set to:')
+  
+  if(themeMode == "light") {
+    body[0].style.color = 'rgb(0, 0, 0)';
+    body[0].style.backgroundColor = 'rgb(255, 255, 255)';
+    localStorage.setItem('theme', 'light');
+    console.log('light');
+  }
+  else if (themeMode == "dark") {
+    body[0].style.color = 'rgb(224, 224, 224)';
+    body[0].style.backgroundColor = 'rgb(32, 32, 32)';
+    localStorage.setItem('theme', 'dark');
+    console.log('dark');
+  }
+  
+  else console.log('none (undefined)');
+  
+}
+
+function theme() {
+  
+  if(themeMode == 'dark') themeMode = 'light';
+  else themeMode = 'dark';
+  
+  setTheme();
+  
+}
+
 // Events
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // :P
+  
   document.querySelector('body').style = "animation-name: load;" +
                                          "animation-duration: 1s;";
   loadSpin();
+  
+  // Theme
+  
+  setTheme();
+  themeBttn.addEventListener('click', theme);
+  
 });
 
 // :P
