@@ -86,6 +86,35 @@ function theme() {
   
 }
 
+function serverStatus(output, url) {
+  
+  output.innerHTML = '🔄 Loading';
+  
+  fetch(url)
+    .then(response => {
+      
+      if(!response.ok) {
+        
+        output.innerHTML = '❌ ' + response.statusText;
+        
+        throw new Error('Response: ' + response.statusText);
+        
+      }
+      
+    })
+    .then(data => {
+      
+      output.innerHTML = '✅ ' + Data;
+      
+    })
+    .catch(error => {
+      
+      output.innerHTML = '⚠️ ' + error;
+      
+    });
+  
+}
+
 // Events
 
 document.addEventListener('DOMContentLoaded', function() {

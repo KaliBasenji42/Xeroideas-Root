@@ -10,24 +10,47 @@ body {
   width: 70%;
   background-color: rgb(32, 32, 32);
   color: rgb(224, 224, 224);
+  
+  margin-top: 0;
 }
 
 h1 {text-align: center;}
 
 p {text-indent: 2rem; font-size: 1.125rem}
 
+a {color: rgb(0, 160, 0)}
+a:hover{color: rgb(0, 96, 0);}
+
 img {
   image-rendering: auto;
   image-rendering: pixelated;
+}
+
+table {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+th, td, tr {
+  border: 1px solid;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 /* Navigation */
 
 #navbar {
   text-align: center;
+  background-color: inherit;
+  
   display: flex;
   align-content: center;
   justify-content: center;
+  
+  position: sticky;
+  top: 0;
+  padding: 1rem;
 }
 
 #navbar > * {
