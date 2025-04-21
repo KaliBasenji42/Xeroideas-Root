@@ -25,6 +25,14 @@ img {
 
 #navbar {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar > * {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 #navbar > a {
