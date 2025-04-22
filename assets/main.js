@@ -10,6 +10,8 @@ let themeMode = localStorage.getItem('theme');
 if(themeMode == null) themeMode = 'dark';
 let themeBttn = document.getElementById('theme');
 
+let outputs;
+
 // Functions
 
 function redirect(href) {
@@ -101,10 +103,12 @@ function serverStatus(output, url) {
         
       }
       
-    })
-    .then(data => {
+      return response.text();
       
-      output.innerHTML = '✅ ' + Data;
+    })
+    .then(file => {
+      
+      output.innerHTML = '✅ ' + file;
       
     })
     .catch(error => {
@@ -112,6 +116,16 @@ function serverStatus(output, url) {
       output.innerHTML = '⚠️ ' + error;
       
     });
+  
+}
+
+function servers() {
+  
+  outputs = document.getElementsByClassName('serverOutput');
+  
+  for(let i = 0; i < outputs.length; i++) {
+    serverStatus(outputs[i], outputs[i].id);
+  }
   
 }
 

@@ -48,10 +48,14 @@
   
 <!--End-->
   
+  <button onclick="servers();" title="Reload" id="reload">
+    🔁
+  </button>
+  
   <table style="width: 100%;">
     <tr>
       <th style="width: 30%;">Server</th>
-      <th style="width: 40%;">Hosted Sites</th>
+      <th style="width: 30%;">Hosted Sites</th>
       <th>Status</th>
     </tr>
     <tr>
@@ -67,9 +71,13 @@
     <tr>
       <td>Cameron's Raspi</td>
       <td>WIP</td>
-      <td class="serverOutput" id="">WIP</td>
+      <td class="serverOutput" id="nowhere">WIP</td>
     </tr>
   </table>
+  
+  <script>
+    servers();
+  </script>
   
 </body>
 
