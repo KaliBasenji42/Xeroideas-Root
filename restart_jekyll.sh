@@ -21,7 +21,7 @@ else
 fi
 
 # Change to the correct directory
-TARGET_DIR="/home/kalibasenji42/jekyll/KaliBasenji42.github.io"
+TARGET_DIR="/home/jekyll/Xeroideas-Root"
 if [ "$PWD" != "$TARGET_DIR" ]; then
   echo "Changing to directory: $TARGET_DIR"
   cd "$TARGET_DIR" || { echo "Failed to change directory to $TARGET_DIR"; exit 1; }
