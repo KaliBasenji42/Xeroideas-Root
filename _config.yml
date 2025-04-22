@@ -44,6 +44,3 @@ exclude:
   - kill_jekyll.sh
   - restart_jekyll.sh
   - setup.py
-  
-include:
-  - status.txt
