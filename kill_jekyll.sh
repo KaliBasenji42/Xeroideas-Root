@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Find the PID(s) of Jekyll
 PIDS=$(pgrep bundle)
