@@ -29,7 +29,7 @@ fi
 
 # Start Jekyll
 echo "Starting Jekyll..."
-bundle exec jekyll serve -P 8000 -t &
+bundle exec jekyll serve -P 4001 -t &
 
 # Confirm the process was started
 if [ $? -eq 0 ]; then
