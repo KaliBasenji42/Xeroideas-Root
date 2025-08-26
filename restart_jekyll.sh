@@ -1,7 +1,12 @@
 #!/usr/bin/bash
 
-# Find the PID(s) of Jekyll
-PIDS=$(pgrep bundle)
+# Variables
+
+PORT=4001
+TARGET_DIR="/home/kalibasenji42/jekyll/Xeroideas-Root"
+
+# Find the PID(s) of Jekyll (Based on Port)
+PIDS=$(lsof -t -i:$PORT )
 
 # Check if Jekyll is running
 if [ -z "$PIDS" ]; then
@@ -21,7 +26,6 @@ else
 fi
 
 # Change to the correct directory
-TARGET_DIR="/home/jekyll/Xeroideas-Root"
 if [ "$PWD" != "$TARGET_DIR" ]; then
   echo "Changing to directory: $TARGET_DIR"
   cd "$TARGET_DIR" || { echo "Failed to change directory to $TARGET_DIR"; exit 1; }
@@ -29,7 +33,7 @@ fi
 
 # Start Jekyll
 echo "Starting Jekyll..."
-bundle exec jekyll serve -P 4001 -t &
+bundle exec jekyll serve -P $PORT -t &
 
 # Confirm the process was started
 if [ $? -eq 0 ]; then
