@@ -80,48 +80,16 @@ function expandAll() {
   
 }
 
-// Set Elements
-
-for(let i = 0; i < head.length; i++) head[i].innerHTML += headHTML;
-
-for(let i = 0; i < body.length; i++) body[i].innerHTML += bodyHTML;
-
-// Events
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('body').style = "animation-name: load;" +
-                                         "animation-duration: 1s;";
-  loadSpin();
-});
-
 // Theme
 
 let sheet = new CSSStyleSheet();
 document.adoptedStyleSheets.push(sheet);
 
 let styleSheetStrings = {
-  'default': `
-body {
-  color: rgb(0, 0, 0);
-  background-color: rgb(224, 160, 244);
-  background-image:
-    linear-gradient(135deg, rgb(224, 192, 255), rgb(224, 128, 244)),
-    linear-gradient(90deg, rgb(224, 192, 255), rgb(224, 128, 244));
-}
-
-table {
-  color: rgb(0, 0, 0);
-  background-color: rgb(224, 224, 224);
-}
-  `,
   'dark': `
 body {
   color: rgb(255, 255, 255);
-  background-color: rgb(0, 0, 0);
-  background-image: none;
-  background-image: 
-    linear-gradient(135deg, rgb(0, 0, 0) 60%, rgb(0, 0, 16), rgb(16, 0, 16)),
-    linear-gradient(90deg, rgb(0, 0, 0) 60%, rgb(0, 0, 16), rgb(16, 0, 16));
+  background-color: rgb(32, 32, 32);
 }
 
 table {
@@ -133,9 +101,6 @@ table {
 body {
   color: rgb(0, 0, 0);
   background-color: rgb(224, 224, 224);
-  background-image: 
-    linear-gradient(135deg, rgb(224, 224, 224) 60%, rgb(232, 232, 224), rgb(232, 224, 224)),
-    linear-gradient(90deg, rgb(224, 224, 224) 60%, rgb(232, 232, 224), rgb(232, 224, 224));
 }
 
 table {
@@ -198,7 +163,52 @@ updateTheme();
 
 setTimeout(nextTheme, 10, 0);
 
+// Set Elements
+
+for(let i = 0; i < head.length; i++) head[i].innerHTML += headHTML;
+
+for(let i = 0; i < body.length; i++) body[i].innerHTML += bodyHTML;
+
+// Events
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('body').style = "animation-name: load;" +
+                                         "animation-duration: 1s;";
+  loadSpin();
+});
+
 // Server
+
+function serverStatus(output, url) {
+  
+  output.innerHTML = '🔄 Loading';
+  
+  fetch(url)
+    .then(response => {
+      
+      if(!response.ok) {
+        
+        output.innerHTML = '❌ ' + response.statusText;
+        
+        throw new Error('Response: ' + response.statusText);
+        
+      }
+      
+      return response.text();
+      
+    })
+    .then(file => {
+      
+      output.innerHTML = '✅ ' + file;
+      
+    })
+    .catch(error => {
+      
+      output.innerHTML = '⚠️ ' + error;
+      
+    });
+  
+}
 
 function servers() {
   

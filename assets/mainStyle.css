@@ -41,6 +41,27 @@ th, td, tr {
   padding-bottom: 0.25rem;
 }
 
+footer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  
+  font-size: 12px;
+  
+  background-image: linear-gradient(90deg, 
+                                  rgba(0, 0, 0, 0), 
+                                  rgba(128, 64, 128, 0.25) 20%, 
+                                  rgba(128, 64, 128, 0.25) 80%, 
+                                  rgba(0, 0, 0, 0));
+}
+
+footer > div {
+  width: 60%;
+  margin: auto;
+}
+
 #reload {
   background-color: rgb(240, 240, 240);
   width: 3rem;
@@ -88,23 +109,6 @@ th, td, tr {
   border-radius: 0.5rem;
   
   font-size: 1.25rem;
-}
-
-footer {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  
-  font-size: 12px;
-  
-  background-color: rgba(128, 240, 128, 0.25);
-}
-
-footer > div {
-  width: 60%;
-  margin: auto;
 }
 
 /* Theme */
