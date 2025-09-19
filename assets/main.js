@@ -4,6 +4,10 @@ const head = document.getElementsByTagName("head");
 
 const body = document.getElementsByTagName("body");
 
+let headHTML = '';
+
+let bodyHTML = '';
+
 let timeout;
 
 // Functions
@@ -223,6 +227,7 @@ function servers() {
 // Restart Warning
 
 let restartTimeMS;
+let restartNote = '';
 let restartWarningElem;
 let restartWarningCont
 let restartWarningMinButton;
@@ -245,8 +250,9 @@ function updateRestartWarning() {
   if(seconds < 10) timeTill += '0';
   timeTill += seconds;
   
-  restartWarningCont.innerHTML = 'Server will restart ' + time;
-  restartWarningCont.innerHTML += ' (in ' + timeTill + ')';
+  restartWarningCont.innerHTML = 'Server will restart/be down:<br>' + time;
+  restartWarningCont.innerHTML += '<br>in ' + timeTill;
+  if(restartNote) restartWarningCont.innerHTML += '<br>Note: ' + restartNote;
   
 }
 
@@ -255,11 +261,13 @@ function restartWarningToggleShow() {
   restartWarningShow = !restartWarningShow;
   
   if(restartWarningShow) {
-    restartWarningCont.style.maxWidth = '100rem';
+    restartWarningCont.style.maxWidth = '80vw';
+    restartWarningCont.style.maxHeight = '80vh';
     restartWarningMinButton.innerHTML = '<';
   }
   else {
-    restartWarningCont.style.maxWidth = '0rem';
+    restartWarningCont.style.maxWidth = '0';
+    restartWarningCont.style.maxHeight = '1rem';
     restartWarningMinButton.innerHTML = '❗>';
   }
   
@@ -272,12 +280,16 @@ async function restartWarning() {
   if(!file.ok) return // Return if error
   
   let text = await file.text();
-  //console.log(text);
+  text = text.split('\n');
+  //console.log(text.split('\n'));
   
-  if(text[0] == '!') return // Return if empty
+  if(text[0][0] == '!') return // Return if empty
   
-  restartTimeMS = parseInt(text);
-  //console.log(timeMS);
+  restartTimeMS = parseInt(text[0]);
+  //console.log(restartTimeMS);
+  
+  restartNote = text[1];
+  //console.log(restartNote);
   
   restartWarningElem = document.createElement('div');
   document.getElementsByTagName('body')[0].appendChild(restartWarningElem);

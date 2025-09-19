@@ -1,0 +1,12 @@
+!
+
+
+Line 1:
+"!": Do not show restart warning
+Otherwise, set to date converted to milliseconds
+Get this by inputting the following in the console:
+const d = new Date("{date}");
+d.getTime();
+
+Line 2:
+Notes, if empty, it will not render.

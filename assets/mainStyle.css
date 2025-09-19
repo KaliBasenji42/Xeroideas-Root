@@ -130,7 +130,7 @@ footer > div {
 /* Restart Warning */
 
 .restartWarn {
-  background-color: rgb(255, 192, 0);
+  background-color: rgb(255, 224, 32);
   color: rgb(0, 0, 0);
   
   position: fixed;
@@ -138,67 +138,20 @@ footer > div {
   top: 2rem;
   
   padding: 0.5rem;
-  text-align: center;
+  
+  border-radius: 0.25rem;
 }
 
 .restartWarn > div {
   display: inline-block;
   
   max-width: 0;
-  transition: max-width 1s;
+  max-height: 1rem;
+  transition: max-width 1s, max-height 1s;
   
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-/* Navigation */
-
-.navigation {text-align: center;}
-
-.nav, .navArrow {
-  background-color: rgb(128, 208, 128);
-  color: rgb(0, 0, 0);
-  padding: 0.25em;
-  margin: 0.1em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1.5em;
-  cursor: pointer;
-  border-radius: 0.25em;
-}
-
-a.nav:hover, a.nav:active, a.navArrow:hover, a.navArrow:active {
-  background-color: rgb(128, 192, 128);
-  color: rgb(0, 0, 0);
-}
-
-.navArrow {
-  font-family: Consolas;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
-}
-
-div.navArrow {
-  background-color: rgb(160, 192, 160);
-  color: rgb(128, 128, 128);
-  cursor: not-allowed;
-}
-
-.sectBttn {
-  text-align: center;
-  line-height: 2em;
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.sect {
-  position: relative;
+  overflow-x: auto;
   overflow-y: hidden;
-  transition: max-height 1s;
+  white-space: nowrap;
 }
 
 /* Animated Button */
