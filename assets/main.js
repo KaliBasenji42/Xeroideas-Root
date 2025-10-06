@@ -115,7 +115,7 @@ table {
   background-color: rgb(224, 224, 224);
 }
 
-a {color: rgb(0, 64, 0);}
+a {color: rgb(0, 96, 0);}
 a:hover {color: rgb(0, 128, 0);}
   `
 };
