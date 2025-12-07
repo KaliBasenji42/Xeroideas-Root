@@ -230,20 +230,101 @@ function servers() {
   
 }
 
-// Restart Warning
+// Warning
 
-let restartTimeMS;
-let restartNote = '';
-let restartWarningElem;
-let restartWarningCont
-let restartWarningMinButton;
-let restartWarningShow = false;
+let warning = {}; // Declare warning object
 
-function updateRestartWarning() {
-
-  let time = new Date(restartTimeMS).toString();
+async function loadWarning(warningJSONPath = '../../warning.json') {
+  // Get data from 'warning.json'
   
-  let secondsTill = Math.floor((restartTimeMS - Date.now()) / 1000);
+  let file = await fetch(warningJSONPath); // Fetch
+  
+  if(!file.ok) {
+    throw new Error('Warning Fetch Response: ' + response.statusText); // Throw Error
+  }
+  
+  let fileObj = await file.json(); // Get JSON object
+  
+  for(const key in fileObj) warning[key] = fileObj[key]; // Set warning to JSON
+  
+  // Logic / Variables
+  
+  warning.show = false;
+  const nowMS = Date.now(); // Current time in milliseconds
+  let nextDates = [];
+  
+  for(const pattern of warning.repeatPatterns) { // All repeat patterns
+    
+    if(!pattern.active) continue; // Ignore if inactive
+    
+    // Push Date to nextDates
+    
+    nextDates.push({
+      MS: warning.nextDatePattern(pattern, new Date(nowMS)).getTime(), // Date in MS
+      note: pattern.note,
+      dur: pattern.dur
+    });
+    
+  }
+  
+  for(const setDate of warning.setDates) { // All set dates
+    
+    const MS = new Date(setDate.date).getTime();
+    
+    if(MS - nowMS > 0) { // Push Date to nextDates
+      nextDates.push({
+        MS: MS, // Date in MS
+        note: setDate.note,
+        dur: setDate.dur
+      });
+    }
+    
+  }
+  
+  nextDates = nextDates.sort(function(a, b){return b.MS - a.MS}); // Sort
+  // Sorted such closest dates are iterated last (take final say)
+  
+  //console.log(nextDates);
+  
+  for(const date of nextDates) { // Each next date in order
+    
+    if(date.MS - nowMS > date.dur) continue; // Continue if out of range
+    
+    warning.show = true;
+    warning.timeMS = date.MS;
+    warning.note = date.note;
+    
+  }
+  
+  if(!warning.show) return; // Return if none in range
+  
+  // Other Declarations
+  
+  warning.expand = false;
+  
+  warning.elem = document.createElement('div');
+  document.getElementsByTagName('body')[0].appendChild(warning.elem);
+  warning.elem.className = 'warn';
+  
+  warning.cont = document.createElement('div');
+  warning.elem.appendChild(warning.cont);
+  
+  warning.button = document.createElement('button');
+  warning.elem.appendChild(warning.button);
+  warning.button.onclick = warning.toggle;
+  warning.button.innerHTML = '❗>';
+  
+  // Rendering
+  
+  warning.renderInterval = setInterval(warning.render, 100);
+  
+}
+
+warning.render = function() { // Update warning
+  
+  let time = new Date(warning.timeMS).toString();
+  
+  let secondsTill = Math.floor((warning.timeMS - Date.now()) / 1000);
   let hours = Math.floor(secondsTill / (3600));
   secondsTill += - (hours * 3600)
   let minutes = Math.floor((secondsTill) / 60);
@@ -256,65 +337,76 @@ function updateRestartWarning() {
   if(seconds < 10) timeTill += '0';
   timeTill += seconds;
   
-  restartWarningCont.innerHTML = 'Server will restart/be down:<br>' + time;
-  restartWarningCont.innerHTML += '<br>in ' + timeTill;
-  if(restartNote) restartWarningCont.innerHTML += '<br>Note: ' + restartNote;
+  warning.cont.innerHTML = 'Warning for:<br>' + time;
+  warning.cont.innerHTML += '<br>in ' + timeTill;
+  if(warning.note != "") warning.cont.innerHTML += '<br>Note: ' + warning.note;
   
-}
+};
 
-function restartWarningToggleShow() {
+warning.toggle = function() { // Toggle expand
   
-  restartWarningShow = !restartWarningShow;
+  warning.expand = !warning.expand;
   
-  if(restartWarningShow) {
-    restartWarningCont.style.maxWidth = '80vw';
-    restartWarningCont.style.maxHeight = '80vh';
-    restartWarningMinButton.innerHTML = '<';
+  if(warning.expand) {
+    warning.cont.style.maxWidth = '80vw';
+    warning.cont.style.maxHeight = '80vh';
+    warning.button.innerHTML = '<';
   }
   else {
-    restartWarningCont.style.maxWidth = '0';
-    restartWarningCont.style.maxHeight = '1rem';
-    restartWarningMinButton.innerHTML = '❗>';
+    warning.cont.style.maxWidth = '0';
+    warning.cont.style.maxHeight = '1rem';
+    warning.button.innerHTML = '❗>';
   }
   
+};
+
+warning.nextDatePattern = function(pattern, now) {
+  // Returns date that matches pattern & is directly after to now
+  
+  // Initial Time
+  
+  const nextDate = new Date(now.getTime());
+  
+  nextDate.setHours(pattern.time[0]);
+  nextDate.setMinutes(pattern.time[1]);
+  nextDate.setSeconds(pattern.time[2]);
+  
+  // Match
+  
+  let match = false;
+  let DoMMatch = false;
+  let DoWMatch = false;
+  
+  for(let i = 0; true; i++) { // Loop
+    
+    if(i > 10000) { // Match too far out
+      console.log('Could not find reasonable date for Warning Pattern: ');
+      console.log(pattern);
+      return new Date(0);
+    }
+    
+    // Logic / Match
+    
+    DoMMatch = pattern.dayOfMonth == '*' || pattern.dayOfMonth == nextDate.getDate();
+    DoWMatch = pattern.dayOfWeek == '*' || pattern.dayOfWeek == nextDate.getDay();
+    
+    match = DoMMatch && DoWMatch && now.getTime() < nextDate.getTime();
+    
+    if(match) break;
+    
+    // Increment
+    
+    nextDate.setDate(nextDate.getDate() + 1);
+    
+  }
+  
+  return nextDate;
+  
 }
 
-async function restartWarning() {
-  
-  let file = await fetch('../../restartT.txt');
-  
-  if(!file.ok) return // Return if error
-  
-  let text = await file.text();
-  text = text.split('\n');
-  //console.log(text.split('\n'));
-  
-  if(text[0][0] == '!') return // Return if empty
-  
-  restartTimeMS = parseInt(text[0]);
-  //console.log(restartTimeMS);
-  
-  restartNote = text[1];
-  //console.log(restartNote);
-  
-  restartWarningElem = document.createElement('div');
-  document.getElementsByTagName('body')[0].appendChild(restartWarningElem);
-  restartWarningElem.className = 'restartWarn';
-  
-  restartWarningCont = document.createElement('div');
-  restartWarningElem.appendChild(restartWarningCont);
-  
-  restartWarningMinButton = document.createElement('button');
-  restartWarningElem.appendChild(restartWarningMinButton);
-  restartWarningMinButton.onclick = restartWarningToggleShow;
-  restartWarningMinButton.innerHTML = '❗>';
-  
-  updateRestartWarning();
-  let updateRestartWarningInt = setInterval(updateRestartWarning, 100);
-  
-}
-
-restartWarning();
+// Load default path, if 'warningPath' is not defined
+if(typeof warningPath !== 'undefined') loadWarning(warningPath);
+else loadWarning();
 
 // :P
 

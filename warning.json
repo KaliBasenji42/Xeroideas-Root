@@ -1,0 +1,23 @@
+{
+  "!comment0": "Array of pre-set dates",
+  "setDates": [
+    {
+      "date": "2025-1-9 22:23:17", "!comment1": "String: Any JS parsable",
+      "note": "Example", "!comment2": "String: Note to be displayed",
+      "dur": 43200000, "!comment3": "Integer (milliseconds): Time the warning is shown before the listed date. Default: 12 Hours"
+    }
+  ],
+  
+  "!comment4": "Array of patterns to repeat warnings.",
+  "repeatPatterns": [
+    {
+      "active": false, "!comment5": "Boolean: Enable?",
+      "time": [3, 0, 0], "!comment6": "List [hour, minute, second]: Time of day. Default: 3:00:00 AM",
+      "dayOfWeek": 0, "!comment7": "Integer/String (0-7, *): Day of week. Default: Sunday",
+      "dayOfMonth": "*", "!comment8": "Integer/String (0-7, *): Day of month. Default: Any/Ignored",
+      "note": "Weekly Restart", "!comment9": "Displayed note",
+      "dur": 43200000, "!comment10": "Integer (milliseconds): Time the warning is shown before the listed date. Default: 12 Hours"
+    }
+  ]
+  
+}
