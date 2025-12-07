@@ -11,7 +11,7 @@
   "!comment4": "Array of patterns to repeat warnings.",
   "repeatPatterns": [
     {
-      "active": false, "!comment5": "Boolean: Enable?",
+      "active": true, "!comment5": "Boolean: Enable?",
       "time": [3, 0, 0], "!comment6": "List [hour, minute, second]: Time of day. Default: 3:00:00 AM",
       "dayOfWeek": 0, "!comment7": "Integer/String (0-7, *): Day of week. Default: Sunday",
       "dayOfMonth": "*", "!comment8": "Integer/String (0-7, *): Day of month. Default: Any/Ignored",
