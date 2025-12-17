@@ -2,7 +2,7 @@
   "!comment0": "Array of pre-set dates",
   "setDates": [
     {
-      "date": "2025-1-9 22:23:17", "!comment1": "String: Any JS parsable",
+      "date": "2025-1-9 22:23:17 GMT-0700", "!comment1": "String: Any JS parsable, must have time zone.",
       "note": "Example", "!comment2": "String: Note to be displayed",
       "dur": 43200000, "!comment3": "Integer (milliseconds): Time the warning is shown before the listed date. Default: 12 Hours"
     }
@@ -13,10 +13,11 @@
     {
       "active": true, "!comment5": "Boolean: Enable?",
       "time": [3, 0, 0], "!comment6": "List [hour, minute, second]: Time of day. Default: 3:00:00 AM",
-      "dayOfWeek": 0, "!comment7": "Integer/String (0-7, *): Day of week. Default: Sunday",
-      "dayOfMonth": "*", "!comment8": "Integer/String (0-7, *): Day of month. Default: Any/Ignored",
-      "note": "Weekly Restart", "!comment9": "Displayed note",
-      "dur": 43200000, "!comment10": "Integer (milliseconds): Time the warning is shown before the listed date. Default: 12 Hours"
+      "zone": "GMT-0700", "!comment7": "String: Time Zone. Default: America/Denver (UTC-07:00)",
+      "dayOfWeek": 0, "!comment8": "Integer/String (0-7, *): Day of week. Default: Sunday",
+      "dayOfMonth": "*", "!comment9": "Integer/String (0-7, *): Day of month. Default: Any/Ignored",
+      "note": "Test Rep", "!comment10": "Displayed note",
+      "dur": 43200000, "!comment11": "Integer (milliseconds): Time the warning is shown before the listed date. Default: 12 Hours"
     }
   ]
   

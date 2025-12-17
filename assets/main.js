@@ -361,21 +361,29 @@ warning.toggle = function() { // Toggle expand
 };
 
 warning.nextDatePattern = function(pattern, now) {
-  // Returns date that matches pattern & is directly after to now
+  // Returns date that matches pattern & is directly after current time
   
   // Initial Time
   
-  const nextDate = new Date(now.getTime());
+  const recent = new Date(Date.now() - (24 * 60 * 60 * 1000));
+  //console.log(recent);
   
-  nextDate.setHours(pattern.time[0]);
-  nextDate.setMinutes(pattern.time[1]);
-  nextDate.setSeconds(pattern.time[2]);
+  const nextDate = new Date(
+    '' +
+    recent.getFullYear() + '-' +
+    (recent.getMonth() + 1) + '-' +
+    recent.getDate() + ' ' +
+    pattern.time[0] + ':' +
+    pattern.time[1] + ':' +
+    pattern.time[2] + ' ' +
+    pattern.zone
+  );
   
   // Match
   
-  let match = false;
-  let DoMMatch = false;
-  let DoWMatch = false;
+  let match = false; // Matches
+  let DoMMatch = false; // Day of Month Matches
+  let DoWMatch = false; // Day of Week Matches
   
   for(let i = 0; true; i++) { // Loop
     
@@ -391,6 +399,9 @@ warning.nextDatePattern = function(pattern, now) {
     DoWMatch = pattern.dayOfWeek == '*' || pattern.dayOfWeek == nextDate.getDay();
     
     match = DoMMatch && DoWMatch && now.getTime() < nextDate.getTime();
+    
+    //console.log(nextDate);
+    //console.log(match);
     
     if(match) break;
     
